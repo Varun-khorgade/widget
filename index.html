@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Widget</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: transparent; /* Transparent background for Notion */
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .widget {
+            background: linear-gradient(135deg, #1e2a47, #0e1119);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            padding: 24px;
+            width: 300px;
+            color: #00f0ff;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #00ffcc;
+            font-weight: bold;
+        }
+        .message {
+            font-size: 14px;
+            margin: 16px 0;
+            color: #aaa;
+        }
+        .age {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #00ffcc;
+        }
+        .time {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #ff80e4;
+        }
+        .sub-text {
+            font-size: 12px;
+            color: #888;
+            margin-top: 16px;
+        }
+        .blink {
+            color: #ff4081;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="widget">
+    <h1>Hey Varun!</h1>
+    <div class="message">Here’s how long you’ve been alive:</div>
+    <div class="age" id="age"></div>
+    <div class="time" id="time"></div>
+    <div class="sub-text">Updating every second...<span class="blink">⏳</span></div>
+</div>
+
+<script>
+    function calculateAge() {
+        const birthDate = new Date('1996-11-26T10:55:00'); // Your birthdate and time
+        const now = new Date();
+        
+        const diffInMilliseconds = now - birthDate;
+        const totalSeconds = Math.floor(diffInMilliseconds / 1000);
+        const totalMinutes = Math.floor(totalSeconds / 60);
+        const totalHours = Math.floor(totalMinutes / 60);
+        const totalDays = Math.floor(totalHours / 24);
+        
+        const years = Math.floor(totalDays / 365.25);
+        const months = Math.floor((totalDays % 365.25) / 30);
+        const days = totalDays % 365.25 % 30;
+        
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        
+        // Display the age and time
+        document.getElementById('age').innerHTML = `${years} years, ${months} months, ${days} days`;
+        document.getElementById('time').innerHTML = `Time Elapsed: ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    }
+
+    setInterval(calculateAge, 1000); // Updates every second
+    calculateAge(); // Initial call to set the age
+</script>
+
+</body>
+</html>
